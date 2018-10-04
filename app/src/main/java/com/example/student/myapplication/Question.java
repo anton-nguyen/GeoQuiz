@@ -1,5 +1,6 @@
 package com.example.student.myapplication;
-
+//anton nguyen
+//CSC200
 public class Question {
 
     private int mTextResId;

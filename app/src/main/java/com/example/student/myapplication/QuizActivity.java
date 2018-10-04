@@ -1,5 +1,6 @@
 package com.example.student.myapplication;
 //anton nguyen
+//CSC200
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
