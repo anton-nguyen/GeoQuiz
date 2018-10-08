@@ -6,10 +6,15 @@
     <string name="question_africa">Source of the Nile is in Egypt.</string>
     <string name="question_americas">The Amazon is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+    <string name="question_samerica">Peru accounts for more than half of the western coastline of South America.</string>
+    <string name="question_baghdad">The Karun River runs through Baghdad.</string>
+    <string name="question_desert">McMurdo, Antarctica is the driest place on Earth.</string>
+    <string name="question_tatooine">Tatooine, a fictional location from Star Wars, is based on the African country of Gabon.</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
+    <string name="score_toast"></string>
     <string name="menu_settings">Settings</string>
     <!--- <string name="next_button">Next</string> -->
 </resources>

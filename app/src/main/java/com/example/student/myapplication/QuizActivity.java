@@ -13,6 +13,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String MYTAG = "quizactivity";
     private static final String KEY_INDEX = "index";
+    private static final String KEY_SCORE = "score";
     private Button mTrueButton;
     private Button mFalseButton;
     /* private Button mNextButton; */
@@ -23,15 +24,21 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_mideast, false),
             new Question(R.string.question_africa, false),
             new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true)
+            new Question(R.string.question_asia, true),
+            new Question(R.string.question_samerica, false),
+            new Question(R.string.question_baghdad, false),
+            new Question(R.string.question_desert, true),
+            new Question(R.string.question_tatooine, false)
     };
     private int mCurrentIndex = 0;
+    private int mCurrentScore = 0;
 
 
     @Override
     public void onSaveInstanceState(Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
         saveInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        saveInstanceState.putInt(KEY_SCORE, mCurrentScore);
     }
 
     @Override
@@ -67,7 +74,10 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState!=null) mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
+        if (savedInstanceState!=null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
+            mCurrentScore = savedInstanceState.getInt(KEY_SCORE, 0);
+        }
         Log.d(MYTAG,"called onCreate");
         setContentView(R.layout.activity_quiz);
 
@@ -84,10 +94,14 @@ public class QuizActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 0);
                 toast.show(); */
+                mTrueButton.setEnabled(true);
                 checkAnswer(true);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
-                if (mCurrentIndex < 5){ mCurrentIndex++; }
+                if (mCurrentIndex < 9){ mCurrentIndex++; }
+                else {
+                    showScore();
+                }
                 updateQuestion();
                 mTrueButton.setEnabled(true);
                 mFalseButton.setEnabled(true);
@@ -103,10 +117,14 @@ public class QuizActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 0);
                 toast.show(); */
+                mFalseButton.setEnabled(true);
                 checkAnswer(false);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
-                if (mCurrentIndex < 5){ mCurrentIndex++; }
+                if (mCurrentIndex < 9){ mCurrentIndex++; }
+                else {
+                    showScore();
+                }
                 updateQuestion();
                 mTrueButton.setEnabled(true);
                 mFalseButton.setEnabled(true);
@@ -130,15 +148,27 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
     }
 
+    private void setButtons() {
+        mTrueButton.setEnabled(mTrueButton.isEnabled());
+        mFalseButton.setEnabled(mFalseButton.isEnabled());
+    }
+
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
             if (userPressedTrue == answerIsTrue) {
                 messageResId = R.string.correct_toast;
+                mCurrentScore += 1;
             } else {
                 messageResId = R.string.incorrect_toast;
             }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showScore() {
+        int percent = (int) (((double)mCurrentScore/mQuestionBank.length)*100);
+        String score_toast = "RESULT: " + percent + "%";
+        Toast.makeText(QuizActivity.this, score_toast, Toast.LENGTH_LONG).show();
     }
 
 }
