@@ -1,6 +1,5 @@
 package com.example.student.myapplication;
-//anton nguyen
-//CSC200
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mPrevButton;
-    private Button mNextButton;
+    /* private Button mNextButton; */
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
@@ -89,6 +87,10 @@ public class QuizActivity extends AppCompatActivity {
                 checkAnswer(true);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
+                if (mCurrentIndex < 5){ mCurrentIndex++; }
+                updateQuestion();
+                mTrueButton.setEnabled(true);
+                mFalseButton.setEnabled(true);
             }
         });
 
@@ -104,37 +106,23 @@ public class QuizActivity extends AppCompatActivity {
                 checkAnswer(false);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
-            }
-        });
-
-        mPrevButton = (Button) findViewById(R.id.prev_button);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCurrentIndex == 0) {
-                    mCurrentIndex = mQuestionBank.length - 1;
-                } else {
-                    mCurrentIndex--;
-                }
-                /* mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length; */
+                if (mCurrentIndex < 5){ mCurrentIndex++; }
                 updateQuestion();
                 mTrueButton.setEnabled(true);
                 mFalseButton.setEnabled(true);
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.next_button);
+        /* mNextButton = (Button) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                /* mCurrentIndex++;
-                if (mCurrentIndex == mQuestionBank.length) { mCurrentIndex = 0; } */
+                mCurrentIndex++;
                 updateQuestion();
                 mTrueButton.setEnabled(true);
                 mFalseButton.setEnabled(true);
             }
-        });
+        }); */
     }
 
     private void updateQuestion() {
