@@ -3,7 +3,6 @@ package com.example.student.myapplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
@@ -83,28 +82,24 @@ public class QuizActivity extends AppCompatActivity {
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         updateQuestion();
-        /* mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getTextResId()); */
 
         mTrueButton = (Button) findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* Toast toast = Toast.makeText(QuizActivity.this,
-                        R.string.incorrect_toast,
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
-                toast.show(); */
                 mTrueButton.setEnabled(true);
                 checkAnswer(true);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
-                if (mCurrentIndex < 9){ mCurrentIndex++; }
+                if (mCurrentIndex < 9){
+                    mCurrentIndex++;
+                    updateQuestion();
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                }
                 else {
                     showScore();
                 }
-                updateQuestion();
-                mTrueButton.setEnabled(true);
-                mFalseButton.setEnabled(true);
             }
         });
 
@@ -112,22 +107,19 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* Toast toast = Toast.makeText(QuizActivity.this,
-                        R.string.correct_toast,
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
-                toast.show(); */
                 mFalseButton.setEnabled(true);
                 checkAnswer(false);
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
-                if (mCurrentIndex < 9){ mCurrentIndex++; }
+                if (mCurrentIndex < 9){
+                    mCurrentIndex++;
+                    updateQuestion();
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                }
                 else {
                     showScore();
                 }
-                updateQuestion();
-                mTrueButton.setEnabled(true);
-                mFalseButton.setEnabled(true);
             }
         });
 
@@ -148,11 +140,6 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
     }
 
-    private void setButtons() {
-        mTrueButton.setEnabled(mTrueButton.isEnabled());
-        mFalseButton.setEnabled(mFalseButton.isEnabled());
-    }
-
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
@@ -166,9 +153,12 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showScore() {
+        mTrueButton.setEnabled(false);
+        mFalseButton.setEnabled(false);
         int percent = (int) (((double)mCurrentScore/mQuestionBank.length)*100);
-        String score_toast = "RESULT: " + percent + "%";
+        String score_toast = "YOUR QUIZ RESULT: " + percent + "%";
         Toast.makeText(QuizActivity.this, score_toast, Toast.LENGTH_LONG).show();
+        mCurrentScore = 0;
     }
 
 }
