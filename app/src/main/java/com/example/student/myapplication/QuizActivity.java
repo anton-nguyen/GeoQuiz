@@ -1,5 +1,6 @@
 package com.example.student.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_SCORE = "score";
     private Button mTrueButton;
     private Button mFalseButton;
-    /* private Button mNextButton; */
+    private Button mNextButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
@@ -123,16 +125,38 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        /* mNextButton = (Button) findViewById(R.id.next_button);
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(QuizActivity.this,CheatActivity.class);
+//                intent.putExtra("com.example.student.myapplication.answer_is_true", true);
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivityForResult(intent, 99);
+            }
+        });
+
+        mNextButton = (Button) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex++;
-                updateQuestion();
-                mTrueButton.setEnabled(true);
-                mFalseButton.setEnabled(true);
+                if (mCurrentIndex < 9){
+                    mCurrentIndex++;
+                    updateQuestion();
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                }
+                else {
+                    showScore();
+                }
             }
-        }); */
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(this, "" + requestCode, Toast.LENGTH_LONG);
     }
 
     private void updateQuestion() {
