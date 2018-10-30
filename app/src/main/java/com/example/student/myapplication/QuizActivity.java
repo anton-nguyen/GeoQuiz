@@ -1,5 +1,6 @@
 package com.example.student.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String MYTAG = "quizactivity";
     private static final String KEY_INDEX = "index";
     private static final String KEY_SCORE = "score";
+    private static final int REQUEST_CODE_CHEAT = 0;
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
@@ -133,7 +135,7 @@ public class QuizActivity extends AppCompatActivity {
 //                intent.putExtra("com.example.student.myapplication.answer_is_true", true);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
-                startActivityForResult(intent, 99);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
 
@@ -156,7 +158,13 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(this, "" + requestCode, Toast.LENGTH_LONG);
+        if (requestCode==REQUEST_CODE_CHEAT) {
+            if (resultCode == Activity.RESULT_OK) {
+//            Toast.makeText(this,"You cheated", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,"" + data.getBooleanExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
+//            Toast.makeText(this,""+data.getIntExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
+            }
+        }
     }
 
     private void updateQuestion() {
