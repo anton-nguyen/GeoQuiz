@@ -18,8 +18,8 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHEAT = 0;
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
     private Button mCheatButton;
+    private Button mCheckButton;
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
@@ -35,7 +35,6 @@ public class QuizActivity extends AppCompatActivity {
     };
     private int mCurrentIndex = 0;
     private int mCurrentScore = 0;
-
 
     @Override
     public void onSaveInstanceState(Bundle saveInstanceState) {
@@ -139,7 +138,15 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.next_button);
+        mCheckButton = (Button) findViewById(R.id.check_button);
+        mCheckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /* mNextButton = (Button) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +160,7 @@ public class QuizActivity extends AppCompatActivity {
                     showScore();
                 }
             }
-        });
+        }); */
     }
 
     @Override
