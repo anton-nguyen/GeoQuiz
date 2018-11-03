@@ -16,7 +16,6 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_SCORE = "score";
     private static final int REQUEST_CODE_CHEAT = 0;
-    private static final int REQUEST_CODE_CHECK = 0;
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mCheatButton;
@@ -143,9 +142,10 @@ public class QuizActivity extends AppCompatActivity {
         mCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = Score.newIntent(QuizActivity.this);
-                //startActivityForResult(intent, REQUEST_CODE_CHECK);
-                startActivity(new Intent(QuizActivity.this, Score.class));
+                //startActivity(new Intent(QuizActivity.this, Score.class));
+                //openScore();
+                Intent intent = new Intent(QuizActivity.this, Score.class);
+                startActivity(intent);
             }
         });
 
@@ -175,9 +175,6 @@ public class QuizActivity extends AppCompatActivity {
 //            Toast.makeText(this,""+data.getIntExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
             }
         }
-        if (requestCode==REQUEST_CODE_CHECK) {
-
-        }
     }
 
     private void updateQuestion() {
@@ -204,6 +201,11 @@ public class QuizActivity extends AppCompatActivity {
         String score_toast = "YOUR QUIZ RESULT: " + percent + "%";
         Toast.makeText(QuizActivity.this, score_toast, Toast.LENGTH_LONG).show();
         mCurrentScore = 0;
+    }
+
+    private void openScore() {
+        Intent intent = new Intent(QuizActivity.this, Score.class);
+        startActivity(intent);
     }
 
 }
