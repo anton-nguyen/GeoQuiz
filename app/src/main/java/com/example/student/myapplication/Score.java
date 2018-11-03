@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Score extends AppCompatActivity {
-    //private Button mResetButton;
+    private Button mResetButton;
     //private TextView mScoreTextView;
 
     @Override
@@ -19,13 +19,13 @@ public class Score extends AppCompatActivity {
 
         //mScoreTextView = (TextView) findViewById(R.id.score_text_view);
 
-        /* mResetButton = (Button) findViewById(R.id.check_button);
+        mResetButton = (Button) findViewById(R.id.reset_button);
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        }); */
+        });
 
     }
 

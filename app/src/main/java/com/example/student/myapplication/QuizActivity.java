@@ -143,7 +143,6 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(QuizActivity.this, Score.class));
-                //openScore();
                 Intent intent = new Intent(QuizActivity.this, Score.class);
                 startActivity(intent);
             }
@@ -201,11 +200,6 @@ public class QuizActivity extends AppCompatActivity {
         String score_toast = "YOUR QUIZ RESULT: " + percent + "%";
         Toast.makeText(QuizActivity.this, score_toast, Toast.LENGTH_LONG).show();
         mCurrentScore = 0;
-    }
-
-    private void openScore() {
-        Intent intent = new Intent(QuizActivity.this, Score.class);
-        startActivity(intent);
     }
 
 }
