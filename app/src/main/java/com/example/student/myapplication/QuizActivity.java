@@ -16,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_SCORE = "score";
     private static final int REQUEST_CODE_CHEAT = 0;
+    private static final int REQUEST_CODE_CHECK = 0;
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mCheatButton;
@@ -142,7 +143,9 @@ public class QuizActivity extends AppCompatActivity {
         mCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Intent intent = Score.newIntent(QuizActivity.this);
+                //startActivityForResult(intent, REQUEST_CODE_CHECK);
+                startActivity(new Intent(QuizActivity.this, Score.class));
             }
         });
 
@@ -171,6 +174,9 @@ public class QuizActivity extends AppCompatActivity {
 //            Toast.makeText(this,"" + data.getBooleanExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
 //            Toast.makeText(this,""+data.getIntExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
             }
+        }
+        if (requestCode==REQUEST_CODE_CHECK) {
+
         }
     }
 
