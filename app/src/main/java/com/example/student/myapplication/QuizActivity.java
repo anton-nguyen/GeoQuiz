@@ -101,9 +101,6 @@ public class QuizActivity extends AppCompatActivity {
                     mTrueButton.setEnabled(true);
                     mFalseButton.setEnabled(true);
                 }
-                else {
-                    showScore();
-                }
             }
         });
 
@@ -120,9 +117,6 @@ public class QuizActivity extends AppCompatActivity {
                     updateQuestion();
                     mTrueButton.setEnabled(true);
                     mFalseButton.setEnabled(true);
-                }
-                else {
-                    showScore();
                 }
             }
         });
@@ -195,15 +189,6 @@ public class QuizActivity extends AppCompatActivity {
                 messageResId = R.string.incorrect_toast;
             }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
-    }
-
-    private void showScore() {
-        mTrueButton.setEnabled(false);
-        mFalseButton.setEnabled(false);
-        int percent = (int) (((double)mCurrentScore/mQuestionBank.length)*100);
-        String score_toast = "YOUR QUIZ RESULT: " + percent + "%";
-        Toast.makeText(QuizActivity.this, score_toast, Toast.LENGTH_LONG).show();
-        mCurrentScore = 0;
     }
 
 }

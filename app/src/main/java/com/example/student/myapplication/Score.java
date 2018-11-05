@@ -11,13 +11,13 @@ import android.widget.TextView;
 public class Score extends AppCompatActivity {
     private Button mResetButton;
     private TextView mScoreTextView;
+    private TextView mGradeTextView;
     private TextView mLabelTextView;
-    private TextView scoreLabel;
-    private TextView gradeLabel;
     private static final String EXTRA_SCORE = "com.example.student.myapplication.score";
     private static final String EXTRA_GRADE = "com.bignerdranch.android.geoquiz.grade";
     private int mPercent;
     private int mScore;
+    private String mGrade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +27,20 @@ public class Score extends AppCompatActivity {
         mLabelTextView = (TextView) findViewById(R.id.label);
         mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
         mScore = getIntent().getIntExtra(EXTRA_SCORE, 0);
-        mScoreTextView.setText(mScore+"%");
-        //gradeLabel = (TextView) findViewById(R.id.gradeLabel);
-        //Intent data = new Intent();
-
-        //TextView scoreLabel = (TextView) findViewById(R.id.scoreLabel);
-        //TextView gradeLabel = (TextView) findViewById(R.id.gradeLabel);
-        //score = getIntent().getIntExtra(EXTRA_SCORE, 0);
-        //scoreLabel.setText(score);
-
-        //mPercent = getIntent().getIntExtra(EXTRA_SCORE,0);
-        //String score = getIntent().getStringExtra("score");
+        mScoreTextView.setText(mScore + "%");
+            if (mScore > 90)
+                mGrade = "A";
+            else if (mScore > 80)
+                mGrade = "B";
+            else if (mScore > 70)
+                mGrade = "C";
+            else if (mScore > 60)
+                mGrade = "D";
+            else
+                mGrade = "F";
+        mGradeTextView = (TextView) findViewById(R.id.gradeLabel);
+        //mGrade = getIntent().getStringExtra(EXTRA_GRADE);
+        mGradeTextView.setText(mGrade);
 
         mResetButton = (Button) findViewById(R.id.reset_button);
         mResetButton.setOnClickListener(new View.OnClickListener() {
