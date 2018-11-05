@@ -11,20 +11,30 @@ import android.widget.TextView;
 public class Score extends AppCompatActivity {
     private Button mResetButton;
     private TextView mScoreTextView;
+    private TextView scoreLabel;
+    private TextView gradeLabel;
     private static final String EXTRA_SCORE = "com.example.student.myapplication.score";
     private static final String EXTRA_GRADE = "com.bignerdranch.android.geoquiz.grade";
     private int mPercent;
-    private int mCurrentIndex = 1;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        //mScoreTextView = (TextView) findViewById(R.id.answer_text_view);
         mScoreTextView = (TextView) findViewById(R.id.answer_text_view);
-        //String score_toast = "YOUR QUIZ RESULT: " + mPercent + "%";
-        mPercent = getIntent().getIntExtra(EXTRA_SCORE,0);
+        scoreLabel = (TextView) findViewById(R.id.scoreLabel);
+        gradeLabel = (TextView) findViewById(R.id.gradeLabel);
+        Intent data = new Intent();
+
+        //TextView scoreLabel = (TextView) findViewById(R.id.scoreLabel);
+        //TextView gradeLabel = (TextView) findViewById(R.id.gradeLabel);
+        //score = getIntent().getIntExtra(EXTRA_SCORE, 0);
+        //scoreLabel.setText(score);
+
+        //mPercent = getIntent().getIntExtra(EXTRA_SCORE,0);
+        //String score = getIntent().getStringExtra("score");
 
         mResetButton = (Button) findViewById(R.id.reset_button);
         mResetButton.setOnClickListener(new View.OnClickListener() {
@@ -38,9 +48,15 @@ public class Score extends AppCompatActivity {
 
 }
 
-    public static Intent newIntent(Context packageContext, int percent) {
+    public static Intent newIntent(Context packageContext, int score) {
         Intent intent = new Intent(packageContext, Score.class);
-        intent.putExtra(EXTRA_SCORE, percent);
+        intent.putExtra(EXTRA_SCORE, score);
         return intent;
+    }
+
+    private void setGrade(int grade) {
+        Intent data = new Intent();
+        data.putExtra(EXTRA_GRADE, grade);
+        setResult(RESULT_OK, data);
     }
 }
