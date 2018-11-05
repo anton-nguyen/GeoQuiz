@@ -142,8 +142,9 @@ public class QuizActivity extends AppCompatActivity {
         mCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(QuizActivity.this, Score.class));
-                Intent intent = new Intent(QuizActivity.this, Score.class);
+                int percent = (int) (((double)mCurrentScore/mQuestionBank.length)*100);
+                Intent intent = Score.newIntent(QuizActivity.this, percent);
+                //Intent intent = new Intent(QuizActivity.this, Score.class);
                 startActivity(intent);
             }
         });
