@@ -21,5 +21,7 @@
     <string name="cheat_button">Cheat!</string>
     <string name="check_button">Check Score</string>
     <string name="judgment_toast">Cheating is wrong.</string>
+    <string name="score"></string>
+    <string name="grade"></string>
     <string name="reset_button">Reset</string>
 </resources>

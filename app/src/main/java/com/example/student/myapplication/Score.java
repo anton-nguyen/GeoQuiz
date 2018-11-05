@@ -11,22 +11,25 @@ import android.widget.TextView;
 public class Score extends AppCompatActivity {
     private Button mResetButton;
     private TextView mScoreTextView;
+    private TextView mLabelTextView;
     private TextView scoreLabel;
     private TextView gradeLabel;
     private static final String EXTRA_SCORE = "com.example.student.myapplication.score";
     private static final String EXTRA_GRADE = "com.bignerdranch.android.geoquiz.grade";
     private int mPercent;
-    private int score;
+    private int mScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
-        mScoreTextView = (TextView) findViewById(R.id.answer_text_view);
-        scoreLabel = (TextView) findViewById(R.id.scoreLabel);
-        gradeLabel = (TextView) findViewById(R.id.gradeLabel);
-        Intent data = new Intent();
+        mLabelTextView = (TextView) findViewById(R.id.label);
+        mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
+        mScore = getIntent().getIntExtra(EXTRA_SCORE, 0);
+        mScoreTextView.setText(mScore+"%");
+        //gradeLabel = (TextView) findViewById(R.id.gradeLabel);
+        //Intent data = new Intent();
 
         //TextView scoreLabel = (TextView) findViewById(R.id.scoreLabel);
         //TextView gradeLabel = (TextView) findViewById(R.id.gradeLabel);
@@ -54,9 +57,9 @@ public class Score extends AppCompatActivity {
         return intent;
     }
 
-    private void setGrade(int grade) {
+/*    private void setGrade(int grade) {
         Intent data = new Intent();
         data.putExtra(EXTRA_GRADE, grade);
         setResult(RESULT_OK, data);
-    }
+    } */
 }

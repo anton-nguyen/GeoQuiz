@@ -144,10 +144,11 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int score = (int) (((double)mCurrentScore/mQuestionBank.length)*100);
+                //int score = (mCurrentScore/mQuestionBank.length)*100;
                 Intent intent = Score.newIntent(QuizActivity.this, score);
                 //Intent intent = new Intent(QuizActivity.this, Score.class);
                 //intent.putExtra("score", mCurrentScore);
-                startActivityForResult(intent, REQUEST_CODE_SCORE);
+                startActivity(intent);
             }
         });
 
@@ -175,11 +176,6 @@ public class QuizActivity extends AppCompatActivity {
 //            Toast.makeText(this,"You cheated", Toast.LENGTH_LONG).show();
 //            Toast.makeText(this,"" + data.getBooleanExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
 //            Toast.makeText(this,""+data.getIntExtra("EXTRA_ANSWER_SHOWN",Toast.LENGTH_LONG)).show();
-            }
-        }
-        if (requestCode==REQUEST_CODE_SCORE) {
-            if (resultCode == Activity.RESULT_OK) {
-
             }
         }
     }
